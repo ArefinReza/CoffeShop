@@ -692,3 +692,127 @@ section{
 .favorited {
     color: red; /* Change color when favorited */
 }
+
+
+/* Container for the order section */
+.order-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Style for the table number input */
+#table-number {
+    width: 80%; /* Make it take up most of the container */
+    padding: 10px; /* Add padding for comfort */
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Increase font size */
+    margin-bottom: 10px; /* Spacing between inputs */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+/* Change border color on focus */
+#table-number:focus {
+    border-color: #45a049; /* Darker green on focus */
+    outline: none; /* Remove outline */
+}
+
+/* Style for the Gmail input */
+#gmail-input {
+    width: 80%; /* Same width as table number */
+    padding: 10px; /* Add padding */
+    border: 2px solid #2196F3; /* Blue border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Increase font size */
+    margin-bottom: 20px; /* Spacing above the button */
+    transition: border-color 0.3s; /* Smooth transition */
+}
+
+/* Change border color on focus */
+#gmail-input:focus {
+    border-color: #0b7dda; /* Darker blue on focus */
+    outline: none; /* Remove outline */
+}
+
+/* Style for the order button */
+#order-btn {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    padding: 12px 20px; /* Padding for the button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Change background color on hover */
+#order-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Add some responsiveness */
+@media (max-width: 600px) {
+    #table-number, #gmail-input, #order-btn {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+.cart-items-container {
+    max-height: 700px; /* Adjust this value as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    background: #fff; /* Background color */
+    border: 1px solid #ddd; /* Border for better visibility */
+    padding: 10px; /* Padding for inner spacing */
+    border-radius: 5px; /* Rounded corners */
+    position: absolute; /* Adjust position as necessary */
+    width: 300px; /* Width of the cart */
+    z-index: 1000; /* Ensure it appears above other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+/* ----------------------------------------------- */
+
+/* Style for the quantity input */
+input[type="number"] {
+    width: 60px; /* Set a fixed width */
+    padding: 5px; /* Padding for better touch area */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    text-align: center; /* Center text */
+    margin-left: 10px;
+}
+
+/* Style for the total price */
+.total-price {
+    margin-bottom: 15px; /* Space below total price */
+    font-size: 1.2em; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Darker color */
+}
+
+/* Style for the order section inputs */
+.order-section input {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for better touch area */
+    margin-bottom: 10px; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Style for the order button */
+.order-section button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px; /* Padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1em; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.order-section button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}

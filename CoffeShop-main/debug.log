@@ -1,0 +1,17 @@
+Array
+(
+    [table_number] => 11
+    [email] => reza@gmail.com
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [id] => product-1
+                    [name] => fresh coffee
+                    [price] => 15.99
+                    [quantity] => 1
+                )
+
+        )
+
+)

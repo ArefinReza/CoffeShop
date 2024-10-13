@@ -1,0 +1,128 @@
+<!-- contacts.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contacts-header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        .contacts-data {
+            padding: 20px;
+        }
+        .contact-row {
+            background-color: #fff;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        .contact-row:last-child {
+            border-bottom: none;
+        }
+        .contact-row .contact-info {
+            font-weight: bold;
+        }
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 1;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        #admin{
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sticky-header" id="admin">
+            <h1>Messages</h1>
+            <button class="btn btn-danger" onclick="window.location.href='index.html'">Order List</button>
+        </div>
+        <div class="contacts-data" id="contacts-data"></div>
+    </div>
+
+    <script>
+        // Fetch contacts data from PHP file
+        fetch('contacts.php')
+            .then(response => response.text())
+            .then(data => {
+                // Display contacts data
+                const contactsData = document.getElementById("contacts-data");
+                contactsData.innerHTML = '';
+
+                // Parse contacts data
+                const contacts = data.split('<p>');
+                contacts.shift(); // Remove first empty element
+
+                // Sort contacts in descending order of created_at
+                contacts.sort((a, b) => {
+                    const createdAtA = a.split(' - ')[5].split(': ')[1];
+                    const createdAtB = b.split(' - ')[5].split(': ')[1];
+                    return createdAtB.localeCompare(createdAtA);
+                });
+
+                // Create contact rows
+                contacts.forEach(contact => {
+                    const contactRow = document.createElement('div');
+                    contactRow.classList.add('contact-row');
+
+                    // Extract contact info
+                    const contactInfo = contact.split(' - ');
+                    const id = contactInfo[0].split(': ')[1];
+                    const name = contactInfo[1].split(': ')[1];
+                    const email = contactInfo[2].split(': ')[1];
+                    const phone = contactInfo[3].split(': ')[1];
+                    const message = contactInfo[4].split(': ')[1];
+                    const createdAt = contactInfo[5].split(': ')[1];
+
+                    // Create contact info elements
+                    const idElement = document.createElement('p');
+                    idElement.classList.add('contact-info');
+                    idElement.textContent = `ID: ${id}`;
+
+                    const nameElement = document.createElement('p');
+                    nameElement.textContent = `Name: ${name}`;
+
+                    const emailElement = document.createElement('p');
+                    emailElement.textContent = `Email: ${email}`;
+
+                    const phoneElement = document.createElement('p');
+                    phoneElement.textContent = `Phone: ${phone}`;
+
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = `Message: ${message}`;
+
+                    const createdAtElement = document.createElement('p');
+                    createdAtElement.textContent = `Created At: ${createdAt}`;
+
+                    // Append contact info elements to contact row
+                    contactRow.appendChild(idElement);
+                    contactRow.appendChild(nameElement);
+                    contactRow.appendChild(emailElement);
+                    contactRow.appendChild(phoneElement);
+                    contactRow.appendChild(messageElement);
+                    contactRow.appendChild(createdAtElement);
+
+                    // Append contact row to contacts data
+                    contactsData.appendChild(contactRow);
+                });
+            });
+    </script>
+</body>
+</html>
