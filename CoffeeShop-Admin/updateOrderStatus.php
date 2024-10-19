@@ -1,21 +1,7 @@
 <?php
-// updateOrderStatus.php
+include('includes/db.php'); 
 
 header('Content-Type: application/json');
-
-// Database connection parameters
-$host = 'localhost'; // Your MySQL host
-$db = 'coffeetusi'; // Your database name
-$user = 'root'; // Your MySQL username
-$pass = ''; // Your MySQL password
-
-// Create a connection to the MySQL database
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(['message' => 'Connection failed: ' . $conn->connect_error]));
-}
 
 // Get the JSON input
 $data = json_decode(file_get_contents('php://input'), true);
