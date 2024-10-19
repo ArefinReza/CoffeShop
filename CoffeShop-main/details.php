@@ -273,7 +273,7 @@ if ($result->num_rows > 0) {
     <a href="index.php#blogs">Blogs</a>
 </div>
 
-<div class="credit">Created by <span>Tusirul Kobir</span> | all rights reserved</div>
+<div class="credit">Created by <span>Arefin Reza</span> | all rights reserved</div>
 
 </section>
 
