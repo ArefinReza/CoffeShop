@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop - Our Story</title>
+
+    <!-- Google Fonts and Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
+
+    <!-- Custom CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1, h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        a {
+            color: #efeeeb;
+            text-decoration: none;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 50px;
+            background-color: #222;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            color: #ffdd57;
+            opacity: 0;
+            animation: slideInLeft 1.5s forwards;
+        }
+
+        .about p {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #ddd;
+            opacity: 0;
+            animation: slideInRight 1.5s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Menu Section */
+        .menu {
+            background-color: #111;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .menu h2 {
+            color: #ffdd57;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .menu-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .menu-item {
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item h3 {
+            color: #ffdd57;
+            padding: 20px 0;
+            text-transform: uppercase;
+        }
+
+        .menu-item p {
+            color: #bbb;
+            padding: 0 20px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #222;
+            padding: 30px;
+            text-align: center;
+            color: #777;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: #ffdd57;
+        }
+
+
+        /* Welcome Message Styling */
+.welcome-message {
+    position: relative;
+    text-align: center;
+    color: #ffdd57;
+    margin-top: 100px;
+}
+
+.welcome-message h1 {
+    font-size: 4rem;
+    color: #ffdd57; /* Bright white text */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: fadeInDown 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Image Grid Styling */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(-100px);
+    animation: imageSlideIn 1.2s forwards;
+}
+
+.image-grid img:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.image-grid img:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.image-grid img:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+@keyframes imageSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+
+        <a href="#" class="logo">
+            <img src="images/logo1.png" alt="">
+        </a>
+        
+        <nav class="navbar">
+                <a href="index.php#home">home</a>
+                <a href="index.php#about">about</a>
+                <a href="index.php#menu">menu</a>
+                <a href="index.php#products">products</a>
+                <a href="index.php#review">review</a>
+                <a href="index.php#contact">contact</a>
+                <a href="index.php#blogs">blogs</a>
+            </nav>
+        <div class="icons">
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <a href="#contact"><div class="fas fa-comment" id="favorite"></div></a>
+            <!-- <span class="fas fa-comment"></span> -->
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+        
+        <div class="search-form">
+            <input type="search" id="search-box" placeholder="Search menu...">
+            <label for="search-box" class="fas fa-search" id="search-btn"></label>
+        </div>
+        
+        <!-- <div class="cart-items-container"></div> -->
+        <div class="cart">
+            <div class="cart-items-container">
+                <!-- Cart items will be dynamically loaded here -->
+            </div>
+        </div>
+        </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="welcome-message">
+            <h1>Welcome to CoffeeTusi</h1>
+        </div>
+        
+        <div class="image-grid">
+            <img src="https://seattlerefined.com/resources/media2/16x9/full/1015/center/80/ed4c2b1d-55e9-4140-a83d-0995fcc7e83b-EastsideCoffeeShops6.jpg" alt="Coffee Image 3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDzxxRBpkBZ8to8DLnVG3Lh7x2cyzx0wUEJA&s" alt="Coffee Image 4">
+        </div>
+        
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>Our Story</h2>
+        <p>At CoffeeTusi, we believe that every cup tells a story. From our carefully sourced beans to the art of
+            brewing, we are passionate about delivering a delightful coffee experience. Join us to explore a world of
+            flavors, warmth, and conversations.</p>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu">
+        <h2>Our Special Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=700&q=80" alt="Espresso">
+                <h3>Espresso</h3>
+                <p>Rich and bold, our espresso is a perfect pick-me-up.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?auto=format&fit=crop&w=700&q=80" alt="Cappuccino">
+                <h3>Cappuccino</h3>
+                <p>A smooth blend of espresso and steamed milk topped with foam.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=700&q=80" alt="Latte">
+                <h3>Latte</h3>
+                <p>Silky and creamy, our latte is the perfect indulgence.</p>
+            </div>
+        </div>
+    </section>
+
+     <!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+    
+    <div class="links">
+        <a href="index.php#home">Home</a>
+        <a href="index.php#about">About</a>
+        <a href="index.php#menu">Menu</a>
+        <a href="index.php#products">Products</a>
+        <a href="index.php#review">Review</a>
+        <a href="index.php#contact">Contact</a>
+        <a href="index.php#blogs">Blogs</a>
+    </div>
+    
+    <div class="credit">Created by <span>Tusirul Kobir</span> | all rights reserved</div>
+    
+    </section>
+    
+    <!-- footer section ends -->
+    <script src="js/script.js"></script>
+    <script src="js/search.js"></script>
+</body>
+
+</html>
