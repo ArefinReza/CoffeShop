@@ -68,3 +68,26 @@ if ($conn->query($createContactsTable) === TRUE) {
 // Close the connection
 $conn->close();
 ?>
+
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(50) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `price` decimal(10, 2) NOT NULL,
+  `special_price` decimal(10, 2) DEFAULT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    review TEXT NOT NULL,
+image_url VARCHAR(255),
+    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);

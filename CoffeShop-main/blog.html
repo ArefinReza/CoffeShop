@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeTusi - Coffee Blog</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
+
+
+    <!-- Custom CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, p {
+            margin: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('your-hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: #fff;
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Layout */
+        .section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 50px;
+            min-height: 100vh;
+            transition: all 0.5s;
+        }
+
+        .section:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .section img {
+            width: 50%;
+            height: auto;
+            border-radius: 10px;
+            animation: slideIn 1.5s ease-out forwards;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .section-content {
+            width: 45%;
+            padding: 20px;
+            animation: fadeInUp 1.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .section-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .section-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .section {
+                flex-direction: column;
+            }
+
+            .section img, .section-content {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section-content {
+                padding: 40px 20px;
+            }
+        }
+
+        footer {
+            background-color: #1c1c1c;
+            padding: 30px 0;
+            text-align: center;
+            color: #888;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+
+        <a href="#" class="logo">
+            <img src="images/logo1.png" alt="">
+        </a>
+        
+        <nav class="navbar">
+                <a href="index.php#home">home</a>
+                <a href="index.php#about">about</a>
+                <a href="index.php#menu">menu</a>
+                <a href="index.php#products">products</a>
+                <a href="index.php#review">review</a>
+                <a href="index.php#contact">contact</a>
+                <a href="index.php#blogs">blogs</a>
+            </nav>
+        <div class="icons">
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <a href="index.php#contact"><div class="fas fa-comment" id="favorite"></div></a>
+            <!-- <span class="fas fa-comment"></span> -->
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+        
+        <div class="search-form">
+            <input type="search" id="search-box" placeholder="Search menu...">
+            <label for="search-box" class="fas fa-search" id="search-btn"></label>
+        </div>
+        
+        <!-- <div class="cart-items-container"></div> -->
+        <div class="cart">
+            <div class="cart-items-container">
+                <!-- Cart items will be dynamically loaded here -->
+            </div>
+        </div>
+        </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to CoffeeTusi</h1>
+    </section>
+
+    <!-- Section 1: Blog Post 1 -->
+    <section class="section" id="coffeespecial">
+        <img src="https://cdn.vox-cdn.com/thumbor/9oYtRuYw4uKKI2MySBExjOj7gpk=/0x0:3072x4080/1200x900/filters:focal(1145x3130:1635x3620)/cdn.vox-cdn.com/uploads/chorus_image/image/60380139/PXL_20220830_183956022.PORTRAIT.61.jpg" alt="Perfect Brew">
+        <div class="section-content">
+            <h2>The Perfect Brew</h2>
+            <p>Discover the art of brewing the perfect cup of coffee. From selecting the best beans to achieving the ideal balance of flavors, we guide you through every step.</p>
+        </div>
+    </section>
+
+    <!-- Section 2: Blog Post 2 -->
+    <section class="section" id="typeOfCoffee">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRynE64SIMMYktlrDB1w8wc0VWIcTpBL2ZBmaWbFrFLfrwhwbh_bEKcE5x5Vw4X1cQD4QU&usqp=CAU" alt="Types of Coffee">
+        <div class="section-content">
+            <h2>Types of Coffee</h2>
+            <p>Explore the various types of coffee drinks and learn the differences between espresso, latte, cappuccino, and more. Every coffee has its own unique story.</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Blog Post 3 -->
+    <section class="section" id="healthOfCoffee">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVgLrwFD5srozae-idwCX7vYFqNPfBjoY7fszlJkKLJMbiEf7MTdRJXM69VYgQSC4TBoQ&usqp=CAU" alt="Health Benefits of Coffee">
+        <div class="section-content">
+            <h2>Health Benefits of Coffee</h2>
+            <p>Coffee is more than just a drink—it’s a source of energy, antioxidants, and mental clarity. Learn about the many health benefits coffee offers.</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Blog Post 4 -->
+    <section class="section" id="cultureOfCoffee">
+        <img src="https://d23hgm0tds3lcv.cloudfront.net/wp-content/uploads/2024/09/240819-12Karat-Carrot-Cake-Latte-0014-WEB.jpg" alt="Coffee Culture">
+        <div class="section-content">
+            <h2>Coffee Culture Around the World</h2>
+            <p>From Italy’s espresso to Turkey’s strong brew, discover how coffee is enjoyed in different cultures and the rituals that surround this global favorite.</p>
+        </div>
+    </section>
+
+    <!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+    
+    <div class="links">
+        <a href="index.php#home">Home</a>
+        <a href="index.php#about">About</a>
+        <a href="index.php#menu">Menu</a>
+        <a href="index.php#products">Products</a>
+        <a href="index.php#review">Review</a>
+        <a href="index.php#contact">Contact</a>
+        <a href="index.php#blogs">Blogs</a>
+    </div>
+    
+    <div class="credit">Created by <span>Tusirul Kobir</span> | all rights reserved</div>
+    
+    </section>
+    
+    <!-- footer section ends -->
+    <script src="js/script.js"></script>
+    <script src="js/search.js"></script>
+</body>
+
+</html>
