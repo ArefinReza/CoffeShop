@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Add Product</title>
+
+    <!-- Linking Google Fonts and Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 1;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        #admin{
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            transition: 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            background-color: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group input[type="file"] {
+            padding: 3px;
+        }
+
+        .form-group .optional {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="sticky-header" id="admin">
+            <h1>Add Product</h1>
+            <button class="btn btn-danger" onclick="window.location.href='contacts.html'">Messages</button>
+            <button class="btn btn-danger" onclick="window.location.href='allproducts.php'">See Product</button>
+            <button class="btn btn-danger" onclick="window.location.href='index.html'">Order List</button>
+        </div>
+
+        <!-- Success and Error Messages -->
+        <div id="responseMessage"></div>
+
+        <form id="addProductForm" action="addproduct.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="product_id">Product ID <span class="optional">(Required)</span></label>
+                <input type="text" id="product_id" name="product_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="product_name">Product Name <span class="optional">(Required)</span></label>
+                <input type="text" id="product_name" name="product_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price (in $) <span class="optional">(Required)</span></label>
+                <input type="number" id="price" name="price" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="special_price">Special Price (in $) <span class="optional">(Optional)</span></label>
+                <input type="number" id="special_price" name="special_price" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="image_url">Product Image URL <span class="optional">(Required)</span></label>
+                <input type="text" id="image_url" name="image_url" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description <span class="optional">(Required)</span></label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category <span class="optional">(Optional)</span></label>
+                <select id="category" name="category">
+                    <option value="">Select a category</option>
+                    <option value="menu">menu</option>
+                    <option value="product">product</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add Product">
+            </div>
+        </form>
+
+        <div class="form-footer">
+            <p>Go back to <a href="index.html">Admin Dashboard</a></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('addProductForm');
+        const responseMessage = document.getElementById('responseMessage');
+    
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+    
+            const formData = new FormData(form);
+    
+            fetch('addproduct.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    responseMessage.innerHTML = '';
+                    if (data.success) {
+                        responseMessage.innerHTML = '<div class="alert alert-success">Product added successfully!</div>';
+                        
+                        // Clear the input fields
+                        form.reset();
+    
+                        // Scroll to the top of the page
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        responseMessage.innerHTML = '<div class="alert alert-danger">Error: ' + data.message + '</div>';
+                    }
+                })
+                .catch(error => {
+                    responseMessage.innerHTML = '<div class="alert alert-danger">Error: ' + error.message + '</div>';
+                });
+        });
+    </script>
+
+</body>
+
+</html>

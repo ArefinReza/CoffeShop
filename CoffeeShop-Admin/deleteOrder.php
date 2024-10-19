@@ -1,17 +1,6 @@
 // deleteOrder.php
 <?php
-$host = 'localhost'; 
-$db = 'coffeetusi'; 
-$user = 'root'; 
-$pass = ''; 
-
-// Create a connection to the MySQL database
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(['message' => 'Connection failed: ' . $conn->connect_error]));
-}
+include('includes/db.php'); 
 // Get the order ID from the request
 $data = json_decode(file_get_contents("php://input"));
 $orderId = $data->id;

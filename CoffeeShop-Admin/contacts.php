@@ -1,18 +1,6 @@
 <?php
 
-$host = 'localhost'; // Your MySQL host
-$db = 'coffeetusi'; // Your database name
-$user = 'root'; // Your MySQL username
-$pass = ''; // Your MySQL password
-
-// Create a connection to the MySQL database
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(['message' => 'Connection failed: ' . $conn->connect_error]));
-}
-
+include('includes/db.php'); 
 // Fetch contacts data
 $sql = "SELECT * FROM contacts";
 $result = $conn->query($sql);
