@@ -521,7 +521,7 @@ body.fullscreen-active {
         <a href="#blogs">Blogs</a>
     </div>
 
-    <div class="credit">Created by <span>Arefin Reza</span> | all rights reserved</div>
+    <div class="credit">© Copyright by <span>Arefin Reza</span> | all rights reserved</div>
 
 </section>
 
