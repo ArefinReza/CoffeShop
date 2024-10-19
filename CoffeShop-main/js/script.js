@@ -1,82 +1,187 @@
 
-const scrollContainer = document.querySelector('.scrolling-box-container');
-    
-function autoScroll() {
-    scrollContainer.scrollBy(1, 0); 
+// Navbar toggle
+let navbar = document.querySelector('.navbar');
 
-
-    if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-        scrollContainer.scrollLeft = 0;
-    }
+document.querySelector('#menu-btn').onclick = () => {
+    navbar.classList.toggle('active');
+    searchForm.classList.remove('active');
+    cartItem.classList.remove('active');
 }
 
-setInterval(autoScroll, 20);
+let searchForm = document.querySelector('.search-form');
 
-document.getElementById('seeMoreBtn').addEventListener('click', function () {
+document.querySelector('#search-btn').onclick = () => {
+    searchForm.classList.toggle('active');
+    navbar.classList.remove('active');
+    cartItem.classList.remove('active');
+}
 
-const hiddenProducts = document.querySelectorAll('.hidden-product');
+let cartItem = document.querySelector('.cart-items-container');
 
+document.querySelector('#cart-btn').onclick = () => {
+    cartItem.classList.toggle('active');
+    navbar.classList.remove('active');
+    searchForm.classList.remove('active');
+}
 
-hiddenProducts.forEach(function (product) {
-    product.classList.remove('hidden-product');
+// Favorite item toggle
+let favorite = document.querySelector('.favorite-items-container');
+
+document.querySelector('#favorite').onclick = () => {
+    favorite.classList.toggle('active');
+    navbar.classList.remove('active');
+    searchForm.classList.remove('active');
+}
+
+// Close the cart when clicking outside of it
+document.addEventListener('click', (event) => {
+    const isClickInsideCart = cartItem.contains(event.target);
+    const isCartButton = document.querySelector('#cart-btn').contains(event.target);
+
+    if (!isClickInsideCart && !isCartButton) {
+        cartItem.classList.remove('active');
+    }
 });
 
-document.getElementById('seeMoreBtn').style.display = 'none';
-});
+// Initialize cart if not present in localStorage
+if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+}
 
+// Add to cart function
+function addToCart(id, name, price, image) {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+        alert('This item is already in your cart!');
+        return;
+    }
 
+    cart.push({ id, name, price, image });
+    alert('Successfully Added!');
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadFavItems();
+}
 
+// Load cart items to display in the cart section
+function loadFavItems() {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cartContainer = document.querySelector('.cart-items-container');
+    
+    cartContainer.innerHTML = '';
+    let totalPrice = 0;
 
+    cart.forEach(item => {
+        let cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        let quantityInputId = `quantity-${item.id}`;
 
+        cartItem.innerHTML = `
+            <span class="fas fa-times" onclick="removeFromCart('${item.id}')"></span>
+            <img src="${item.image}" alt="">
+            <div class="content">
+                <h3>${item.name}</h3>
+                <div class="price">$${item.price.toFixed(2)}</div>
+                <label for="${quantityInputId}">Quantity:</label>
+                <input type="number" id="${quantityInputId}" min="1" value="1" onchange="updateTotalPrice()">
+            </div>
+        `;
+        cartContainer.appendChild(cartItem);
 
-document.getElementById('search-box').addEventListener('input', function () {
-var searchTerm = document.getElementById('search-box').value.toLowerCase().trim();
-
-// Get all product boxes
-var products = document.querySelectorAll('.box-container .box');
-
-// Get all other components except the search box and product list
-var otherComponents = document.querySelectorAll('.blur-on-search');
-
-// If the search term is empty, show all products and remove blur
-if (searchTerm === '') {
-    resetPage(products, otherComponents);
-} else {
-    let hasMatch = false;
-
-    // If there is a search term, filter products dynamically
-    products.forEach(function (product) {
-        var productName = product.querySelector('h3').innerText.toLowerCase();
-
-        // Show the product if it matches the search term, otherwise hide it
-        if (productName.includes(searchTerm)) {
-            product.style.display = 'block'; // Show matching product
-            product.classList.add('fullscreen-product'); // Add full-screen effect
-            hasMatch = true;
-        } else {
-            product.style.display = 'none'; // Hide non-matching product
-        }
+        let quantity = parseInt(document.getElementById(quantityInputId).value) || 1;
+        totalPrice += item.price * quantity;
     });
 
-    // If matching products are found, blur other components
-    if (hasMatch) {
-        otherComponents.forEach(function (component) {
-            component.classList.add('blur'); // Blur other components
+    let orderSection = document.createElement('div');
+    orderSection.classList.add('order-section');
+    orderSection.innerHTML = `
+        <div class="total-price-display"><strong>Total Price: $${totalPrice.toFixed(2)}</strong></div>
+        <input type="text" id="table-number" placeholder="Enter your Table Number" required>
+        <input type="email" id="gmail-input" placeholder="Enter your Gmail" required>
+        <button id="order-btn">Order</button>
+    `;
+
+    cartContainer.appendChild(orderSection);
+
+    document.querySelector('#order-btn').onclick = () => {
+        let tableNumber = document.querySelector('#table-number').value;
+        let gmail = document.querySelector('#gmail-input').value;
+
+        if (!gmail || !tableNumber) {
+            alert('Please enter both your Gmail address and Table Number.');
+            return;
+        }
+
+        // Calculate total price
+        let totalPrice = 0;
+        cart.forEach(item => {
+            let quantity = document.querySelector(`#quantity-${item.id}`).value;
+            totalPrice += item.price * quantity;
         });
-    } else {
-        resetPage(products, otherComponents);
-    }
-}
-});
 
-// Function to reset the page when the search is cleared or nothing matches
-function resetPage(products, otherComponents) {
-products.forEach(function (product) {
-    product.style.display = 'block'; // Show all products
-    product.classList.remove('fullscreen-product'); // Remove full-screen effect
-});
+        let orderData = {
+            table_number: tableNumber,
+            email: gmail,
+            total_price: totalPrice, // Include total price in the order data
+            items: cart.map(item => {
+                let quantity = document.querySelector(`#quantity-${item.id}`).value;
+                let totalPriceForItem = item.price * quantity;
+                return {
+                    id: item.id,
+                    name: item.name,
+                    price: totalPriceForItem,
+                    quantity: quantity
+                };
+            })
+        };
 
-otherComponents.forEach(function (component) {
-    component.classList.remove('blur'); // Remove blur from other components
-});
+        fetch('order.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            localStorage.setItem('cart', JSON.stringify([]));
+            loadFavItems();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error placing your order.');
+        });
+    };
+
+    updateTotalPrice();
 }
+
+// Function to update total price when quantity changes
+function updateTotalPrice() {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        let quantity = document.getElementById(`quantity-${item.id}`).value || 1;
+        totalPrice += item.price * quantity;
+    });
+
+    document.querySelector('.total-price-display').innerHTML = `<strong>Total Price: $${totalPrice.toFixed(2)}</strong>`;
+}
+
+// Remove item from cart
+function removeFromCart(id) {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadFavItems();
+}
+
+// -----------------------------------------------------------------------------------
+
+
+
+// Load cart items on page load
+window.onload = loadFavItems;
+
